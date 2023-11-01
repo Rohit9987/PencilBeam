@@ -1,0 +1,6 @@
+
+/*
+	dose = terma * kernal
+
+
+*/
