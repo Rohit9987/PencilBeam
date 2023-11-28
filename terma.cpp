@@ -17,23 +17,30 @@ https://www.nist.gov/pml/x-ray-mass-attenuation-coefficients
 
 */
 
+#include <iostream>
+#include <math.h>
 
-#define SSD 100.0
+#define iso 100.0
 
 class TERMA
 {
 public:
-	TERMA(double phi, double distance): _phi{phi}, _distance{distance}
+	TERMA(double phi, double distance, double SSD): _phi{phi}, _distance{distance}, _ssd{SSD}
 	{
-		std::cout << invsq(200);	
+		std::cout << invsq();	
 
 	}
 private:
-	double _phi, _distance;
+	double _phi, _distance, _ssd, _d, _u;
 	
-	double invsq(distance)
+	double invsq()
 	{
-		return distance * distance / (SSD * SSD);
+		return (iso * iso)/(_distance * _distance);
+	}
+
+	double exponential()
+	{
+		return exp(-(_u*_d));
 	}
 
 };
@@ -44,6 +51,8 @@ int main()
 	double phi = 1.0;
 
 	double distance = 100;
+	
+	TERMA terma1(1, 120, 95);
 
 	
 	return 0;
