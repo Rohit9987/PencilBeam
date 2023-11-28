@@ -49,6 +49,14 @@ private:
 		return exp(-(_u*_d));
 	}
 
+	double attenuation()
+	{
+		// get the attenuation u/p from the attenuation file
+
+
+		return 1;
+	}
+
 	double calculateDose()
 	{
 		std::cout << "phi: " <<_phi << '\n'
