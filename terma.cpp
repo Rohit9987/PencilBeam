@@ -22,16 +22,22 @@ https://www.nist.gov/pml/x-ray-mass-attenuation-coefficients
 
 #define iso 100.0
 
+constexpr double operator "" _MeV(long double const amount)
+{
+	return amount;
+}
+
 class TERMA
 {
 public:
 	TERMA(double phi, double distance, double SSD): _phi{phi}, _distance{distance}, _ssd{SSD}
 	{
-		std::cout << invsq();	
+		std::cout << calculateDose() << '\n'; 
 
 	}
 private:
-	double _phi, _distance, _ssd, _d, _u;
+	double _phi, _distance, _ssd, _d, _u, p = 1.00;
+	double energy = 1.25_MeV;
 	
 	double invsq()
 	{
@@ -41,6 +47,16 @@ private:
 	double exponential()
 	{
 		return exp(-(_u*_d));
+	}
+
+	double calculateDose()
+	{
+		std::cout << "phi: " <<_phi << '\n'
+				  << "invsq : " << invsq() << '\n'
+				  << "energy : " << energy << '\n'
+			//	  << exponential << '\n'
+				  << "u/p : " << _u/p << '\n';
+		return _phi * invsq() * energy * exponential() * _u/p;
 	}
 
 };
@@ -58,10 +74,3 @@ int main()
 	return 0;
 
 }
-
-
-
-
-	
-
-
